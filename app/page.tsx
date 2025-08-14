@@ -1,9 +1,16 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   MapPin,
   Phone,
@@ -17,14 +24,19 @@ import {
   Waves,
   GraduationCap,
   Leaf,
-} from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import NalaikhLogo from "@/assets/logos/nalaikh-logo.png"
-import NcdcLogo from "@/assets/logos/ncdc-logo.png"
-import CityImage from "@/assets/images/nalaikh-city.jpg"
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import NcdcLogo from "@/assets/logos/ncdc-logo.jpg";
+import CityImage from "@/assets/images/nalaikh-city.jpg";
 
-type Language = "mn" | "en" | "zh"
-type Theme = "light" | "dark"
+type Language = "mn" | "en" | "zh";
+type Theme = "light" | "dark";
 
 const translations = {
   mn: {
@@ -49,9 +61,11 @@ const translations = {
     waterPoints: "Усны цэгүүд",
     waterPointsDesc: "Хөв цөөрөм, усан сан, усан парк гэх мэт уст цэгүүд",
     ecoEducation: "Эко боловсрол",
-    ecoEducationDesc: '"Ногоон Налайх" эко боловсрол олгох тогтолцоо, дагалдах дэд бүтэц',
+    ecoEducationDesc:
+      '"Ногоон Налайх" эко боловсрол олгох тогтолцоо, дагалдах дэд бүтэц',
     greenTech: "Ногоон технологи",
-    greenTechDesc: "Ногоон технологи шингээсэн байгууламж, барилга, орон сууц, зам, талбай",
+    greenTechDesc:
+      "Ногоон технологи шингээсэн байгууламж, барилга, орон сууц, зам, талбай",
 
     // Project Outcomes
     strategicResults: "Стратегийн үр дүн",
@@ -91,9 +105,11 @@ const translations = {
     housingStats: "Орон сууцны статистик",
     housingShortage: "Орон сууцны бэрхшээл",
     downPaymentCapable: "Урьдчилгаа төлбөр боломжтой",
-    downPaymentCapableDesc: "НДШ, Цалин Орлого, Урьдчилгаа төлбөр, Барьцаа хөрөнгөтэй",
+    downPaymentCapableDesc:
+      "НДШ, Цалин Орлого, Урьдчилгаа төлбөр, Барьцаа хөрөнгөтэй",
     noDownPayment: "Урьдчилгаа төлбөрийн хуримтлалгүй",
-    noDownPaymentDesc: "НДШ, Цалин орлогоор баталгаажсан ч урьдчилгаа төлбөрийн бэрхшээлтэй",
+    noDownPaymentDesc:
+      "НДШ, Цалин орлогоор баталгаажсан ч урьдчилгаа төлбөрийн бэрхшээлтэй",
     mortgageDemand: "өрх - Ипотек зээлийн эрэлт",
     totalBorrowers: "Нийт зээлдэгч:",
     normalLoans: "Хэвийн зээл:",
@@ -102,13 +118,15 @@ const translations = {
 
     // Financing Solutions
     financingSolutions: "Санхүүжилтийн шийдэл",
-    financingSolutionsDesc: "Нийлмэл хүүгүй, өртгийн хэмнэлттэй корпорацийн санхүүжилт",
+    financingSolutionsDesc:
+      "Нийлмэл хүүгүй, өртгийн хэмнэлттэй корпорацийн санхүүжилт",
     constructionFinancing: "Барилгажилтын санхүүжилт & Корпорацийн санхүүжилт",
     currentProblem: "Одоогийн асуудал:",
     currentProblemDesc:
       "Барилгын төсөл хэрэгжүүлэгч аж ахуйн нэгж нь барилгажилтын хугацаанд шаардлагатай санхүүжилтийг банк санхүүгийн байгууллагаас арилжааны зээл авах замаар шийдвэрлэдэг. Арилжааны зээл нь жилийн 23%-ийн хүүтэй байдаг.",
     solution: "Шийдэл:",
-    solutionDesc: "Бид барилга баригдаж эхлэх үеэс иргэнийг ипотекийн зээлд хамруулвал энэ хүү асуудал шийдэгдэнэ.",
+    solutionDesc:
+      "Бид барилга баригдаж эхлэх үеэс иргэнийг ипотекийн зээлд хамруулвал энэ хүү асуудал шийдэгдэнэ.",
     priceComparison: "Үнийн харьцуулалт",
     bankLoanPrice: "Банкны зээлийн дараах үнэ:",
     preOrderPrice: "Урьдчилсан захиалгын үнэ:",
@@ -116,13 +134,15 @@ const translations = {
 
     // Four Solutions
     downPaymentInsurance: "Урьдчилгаа төлбөрийн даатгал",
-    downPaymentInsuranceDesc: "Залууст ээлтэй орон сууцны хөтөлбөр Даатгал ба баталгаат схем",
+    downPaymentInsuranceDesc:
+      "Залууст ээлтэй орон сууцны хөтөлбөр Даатгал ба баталгаат схем",
     corporateFinancing: "Корпорацийн санхүүжилт",
     corporateFinancingDesc: "Нийлмэл хүүгүй, өртгийн хэмнэлттэй",
     fundingSources: "Санхүүжилтийн эх үүсвэр",
     fundingSourcesDesc: "Хүрэлцээтэй, бие даасан",
     passiveHousing: "Пассив стандарт орон сууц",
-    passiveHousingDesc: "Ногоон санхүүжилт GCF, ADB, JICA. EU Passive House стандарт",
+    passiveHousingDesc:
+      "Ногоон санхүүжилт GCF, ADB, JICA. EU Passive House стандарт",
 
     // Implementation Timeline
     implementationTimeline: "Хэрэгжүүлэх дараалал",
@@ -137,9 +157,11 @@ const translations = {
     contactDesc: "Налайх хотын хөгжлийн корпораци ОНӨААТҮГ",
     phone: "Утас",
     email: "И-мэйл",
-    address: "Хаяг",
+    address:
+      "Улаанбаатар хот, Баянзүрх дүүрэг, 26 дугаар хороо, Хүннүгийн гудамж, MAY SEVEN, 202 тоот",
     addressText: "Налайх дүүрэг\nУлаанбаатар хот, Монгол улс",
-    footerDesc: "Налайх хотын хөгжлийн корпораци - Байгальд ээлтэй хот байгуулалтын тэргүүлэгч.",
+    footerDesc:
+      "Налайх хотын хөгжлийн корпораци - Байгальд ээлтэй хот байгуулалтын тэргүүлэгч.",
     projectsFooter: "Төслүүд",
     greenNalaikhFooter: "Ногоон Налайх",
     housing: "Орон сууцжуулалт",
@@ -149,11 +171,14 @@ const translations = {
     aboutUs: "Бидний тухай",
     careers: "Ажлын байр",
     news: "Мэдээ",
-    copyright: "© 2025 Налайх хотын хөгжлийн корпораци ОНӨААТҮГ. Бүх эрх хуулиар хамгаалагдсан.",
+    copyright:
+      "© 2025 Налайх хотын хөгжлийн корпораци ОНӨААТҮГ. Бүх эрх хуулиар хамгаалагдсан.",
     waterFeatures: "Усны онцлог",
-    waterFeaturesDesc: "Цөөрөм, усан сан, усан парк болон бусад усны элементүүд",
+    waterFeaturesDesc:
+      "Цөөрөм, усан сан, усан парк болон бусад усны элементүүд",
     housingChallenge: "Орон сууцны бэрхшээл",
-    housingChallengeDesc: "Налайх хотын орон сууцны хангамж, эрэлтийн өнөөгийн байдал",
+    housingChallengeDesc:
+      "Налайх хотын орон сууцны хангамж, эрэлтийн өнөөгийн байдал",
     totalHouseholds: "Нийт өрх",
     totalHouseholdsDesc: "Налайх хотод амьдарч буй нийт өрхийн тоо",
     integratedApproach: "Нэгдсэн арга барил",
@@ -191,20 +216,24 @@ const translations = {
 
     // Green Nalaikh Components
     greenComponents: '"Green Nalaikh" Project Components',
-    greenComponentsDesc: "Comprehensive eco-friendly urban development solution",
+    greenComponentsDesc:
+      "Comprehensive eco-friendly urban development solution",
     greenZone: "Green Zone",
     greenZoneDesc: "Public trees, shrubs, lawns, flowers, and greenhouses",
     waterPoints: "Water Features",
     waterPointsDesc: "Ponds, reservoirs, water parks and other water elements",
     ecoEducation: "Eco Education",
-    ecoEducationDesc: '"Green Nalaikh" eco-education system and supporting infrastructure',
+    ecoEducationDesc:
+      '"Green Nalaikh" eco-education system and supporting infrastructure',
     greenTech: "Green Technology",
-    greenTechDesc: "Buildings, housing, roads and spaces integrated with green technology",
+    greenTechDesc:
+      "Buildings, housing, roads and spaces integrated with green technology",
 
     // Project Outcomes
     strategicResults: "Strategic Results",
     projectOutcomes: "Major outcomes from coordinated project implementation",
-    projectOutcomesDesc: "Integrated approach projects will transform Nalaikh into a modern, sustainable city.",
+    projectOutcomesDesc:
+      "Integrated approach projects will transform Nalaikh into a modern, sustainable city.",
     industrialPark: "Industrial Technology Park",
     industrialParkDesc: "Modern technology and innovation center",
     urbanDevelopment: "Urban Development & Housing",
@@ -218,7 +247,8 @@ const translations = {
     benefitsTitle: "Benefits from these projects",
     benefitsDesc: "Impact on Nalaikh city's economic and social development",
     greenFinancing: "Attract green financing",
-    greenFinancingDesc: "Opportunity to attract funding from international green funds",
+    greenFinancingDesc:
+      "Opportunity to attract funding from international green funds",
     exportSupport: "Export support improvement",
     exportSupportDesc: "Increase in manufactured product exports",
     jobCreation: "Increased labor demand",
@@ -238,9 +268,11 @@ const translations = {
     housingStats: "Housing Statistics",
     housingShortage: "Housing shortage",
     downPaymentCapable: "Down payment capable",
-    downPaymentCapableDesc: "With social insurance, salary income, down payment, collateral assets",
+    downPaymentCapableDesc:
+      "With social insurance, salary income, down payment, collateral assets",
     noDownPayment: "No down payment savings",
-    noDownPaymentDesc: "Verified by social insurance and salary income but lacking down payment",
+    noDownPaymentDesc:
+      "Verified by social insurance and salary income but lacking down payment",
     mortgageDemand: "households - Mortgage loan demand",
     totalBorrowers: "Total borrowers:",
     normalLoans: "Normal loans:",
@@ -249,7 +281,8 @@ const translations = {
 
     // Financing Solutions
     financingSolutions: "Financing Solutions",
-    financingSolutionsDesc: "Compound interest-free, cost-effective corporate financing",
+    financingSolutionsDesc:
+      "Compound interest-free, cost-effective corporate financing",
     constructionFinancing: "Construction Financing & Corporate Financing",
     currentProblem: "Current problem:",
     currentProblemDesc:
@@ -264,13 +297,15 @@ const translations = {
 
     // Four Solutions
     downPaymentInsurance: "Down payment insurance",
-    downPaymentInsuranceDesc: "Youth-friendly housing program with insurance and guarantee scheme",
+    downPaymentInsuranceDesc:
+      "Youth-friendly housing program with insurance and guarantee scheme",
     corporateFinancing: "Corporate financing",
     corporateFinancingDesc: "Compound interest-free, cost-effective",
     fundingSources: "Funding sources",
     fundingSourcesDesc: "Adequate and independent",
     passiveHousing: "Passive standard housing",
-    passiveHousingDesc: "Green financing GCF, ADB, JICA. EU Passive House standard",
+    passiveHousingDesc:
+      "Green financing GCF, ADB, JICA. EU Passive House standard",
 
     // Implementation Timeline
     implementationTimeline: "Implementation Timeline",
@@ -287,7 +322,8 @@ const translations = {
     email: "Email",
     address: "Address",
     addressText: "Nalaikh District\nUlaanbaatar, Mongolia",
-    footerDesc: "Nalaikh City Development Corporation - Leader in eco-friendly urban development.",
+    footerDesc:
+      "Nalaikh City Development Corporation - Leader in eco-friendly urban development.",
     projectsFooter: "Projects",
     greenNalaikhFooter: "Green Nalaikh",
     housing: "Housing",
@@ -297,11 +333,14 @@ const translations = {
     aboutUs: "About Us",
     careers: "Careers",
     news: "News",
-    copyright: "© 2025 Nalaikh City Development Corporation LLC. All rights reserved.",
+    copyright:
+      "© 2025 Nalaikh City Development Corporation LLC. All rights reserved.",
     waterFeatures: "Water Features",
-    waterFeaturesDesc: "Ponds, reservoirs, water parks and other water elements",
+    waterFeaturesDesc:
+      "Ponds, reservoirs, water parks and other water elements",
     housingChallenge: "Housing Challenge",
-    housingChallengeDesc: "Current state of housing supply and demand in Nalaikh city",
+    housingChallengeDesc:
+      "Current state of housing supply and demand in Nalaikh city",
     totalHouseholds: "Total Households",
     totalHouseholdsDesc: "Total number of households residing in Nalaikh city",
     integratedApproach: "Integrated Approach",
@@ -352,7 +391,8 @@ const translations = {
     // Project Outcomes
     strategicResults: "战略成果",
     projectOutcomes: "协调项目实施的重大成果",
-    projectOutcomesDesc: "综合方法项目将把纳来哈转变为现代化、可持续发展的城市。",
+    projectOutcomesDesc:
+      "综合方法项目将把纳来哈转变为现代化、可持续发展的城市。",
     industrialPark: "工业技术园区",
     industrialParkDesc: "现代技术和创新中心",
     urbanDevelopment: "城市发展与住房",
@@ -403,7 +443,8 @@ const translations = {
     currentProblemDesc:
       "建设项目实施实体通过从银行和金融机构获得商业贷款来解决建设期间所需的融资。商业贷款年利率为23%。",
     solution: "解决方案：",
-    solutionDesc: "如果我们从建设开始就将公民纳入抵押贷款，这个利息问题就会得到解决。",
+    solutionDesc:
+      "如果我们从建设开始就将公民纳入抵押贷款，这个利息问题就会得到解决。",
     priceComparison: "价格比较",
     bankLoanPrice: "银行贷款后价格：",
     preOrderPrice: "预订价格：",
@@ -467,19 +508,20 @@ const translations = {
     businessHours: "营业时间",
     responseTime: "响应时间",
     partnershipOpportunities: "合作机会",
-    partnershipDesc: "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
+    partnershipDesc:
+      "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
   },
-}
+};
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("mn")
-  const [theme, setTheme] = useState<Theme>("light")
+  const [language, setLanguage] = useState<Language>("mn");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark")
-  }, [theme])
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
-  const t = translations[language]
+  const t = translations[language];
 
   // const scrollToSection = (sectionId: string) => {
   //   const element = document.getElementById(sectionId)
@@ -494,13 +536,22 @@ export default function HomePage() {
       <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50 dark:bg-nalaikh-navy/95 dark:supports-[backdrop-filter]:bg-nalaikh-navy/90 dark:border-nalaikh-gold/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center divide-x divide-accent dark:text-nalaikh-gold space-x-4">
               <div className="flex items-center space-x-3">
-                <img src={NalaikhLogo.src} alt="Nalaikh Logo" className="size-10" />
-                <img src={NcdcLogo.src} alt="NCDC Logo" className="size-10" />
+                <div className="h-full w-2 bg-gray-900 dark:bg-nalaikh-gold" />
+                <Image
+                  src={NcdcLogo.src}
+                  alt="NCDC Logo"
+                  width={40}
+                  height={40}
+                />
                 <div>
-                  <span className="text-lg font-bold text-gray-900 dark:text-nalaikh-gold">NCDC</span>
-                  <div className="text-xs text-gray-600 dark:text-nalaikh-gold/80">{t.company}</div>
+                  <span className="text-lg font-bold text-gray-900 dark:text-nalaikh-gold">
+                    NCDC
+                  </span>
+                  <div className="text-xs text-gray-600 dark:text-nalaikh-gold/80">
+                    {t.company}
+                  </div>
                 </div>
               </div>
             </div>
@@ -518,8 +569,10 @@ export default function HomePage() {
                   href={item.href}
                   className="text-gray-600 hover:text-nalaikh-navy transition-colors dark:text-nalaikh-gold/80 dark:hover:text-nalaikh-gold"
                   onClick={(e) => {
-                    e.preventDefault()
-                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" })
+                    e.preventDefault();
+                    document
+                      .querySelector(item.href)
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
                   {t[item.key as keyof typeof t]}
@@ -529,18 +582,30 @@ export default function HomePage() {
 
             <div className="flex items-center space-x-4">
               {/* Language Selector */}
-              <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
+              <Select
+                value={language}
+                onValueChange={(value: Language) => setLanguage(value)}
+              >
                 <SelectTrigger className="w-20 dark:bg-nalaikh-navy/50 dark:border-nalaikh-gold/30 dark:text-nalaikh-gold">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="dark:bg-nalaikh-navy dark:border-nalaikh-gold/30">
-                  <SelectItem value="mn" className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20">
+                  <SelectItem
+                    value="mn"
+                    className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20"
+                  >
                     MN
                   </SelectItem>
-                  <SelectItem value="en" className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20">
+                  <SelectItem
+                    value="en"
+                    className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20"
+                  >
                     EN
                   </SelectItem>
-                  <SelectItem value="zh" className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20">
+                  <SelectItem
+                    value="zh"
+                    className="dark:text-nalaikh-gold dark:focus:bg-nalaikh-gold/20"
+                  >
                     中文
                   </SelectItem>
                 </SelectContent>
@@ -553,7 +618,11 @@ export default function HomePage() {
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 className="dark:border-nalaikh-gold/30 dark:text-nalaikh-gold dark:hover:bg-nalaikh-gold/20"
               >
-                {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                {theme === "light" ? (
+                  <Moon className="h-4 w-4" />
+                ) : (
+                  <Sun className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -579,7 +648,7 @@ export default function HomePage() {
               <p className="text-lg lg:text-xl text-gray-600 mb-8 leading-relaxed dark:text-nalaikh-gold/80">
                 {t.heroDescription}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
                   className="bg-nalaikh-navy hover:bg-nalaikh-navy/90 dark:bg-nalaikh-gold dark:text-nalaikh-navy dark:hover:bg-nalaikh-gold/90"
@@ -593,7 +662,7 @@ export default function HomePage() {
                 >
                   {t.viewProjects}
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -614,29 +683,45 @@ export default function HomePage() {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20 dark:hover:bg-nalaikh-navy/30">
               <CardHeader>
                 <TreePine className="h-10 w-10 text-green-600 mb-4 dark:text-nalaikh-gold" />
-                <CardTitle className="dark:text-nalaikh-gold">{t.greenZone}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.greenZoneDesc}</CardDescription>
+                <CardTitle className="dark:text-nalaikh-gold">
+                  {t.greenZone}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.greenZoneDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20 dark:hover:bg-nalaikh-navy/30">
               <CardHeader>
                 <Waves className="h-10 w-10 text-blue-600 mb-4 dark:text-nalaikh-gold" />
-                <CardTitle className="dark:text-nalaikh-gold">{t.waterFeatures}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.waterFeaturesDesc}</CardDescription>
+                <CardTitle className="dark:text-nalaikh-gold">
+                  {t.waterFeatures}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.waterFeaturesDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20 dark:hover:bg-nalaikh-navy/30">
               <CardHeader>
                 <GraduationCap className="h-10 w-10 text-purple-600 mb-4 dark:text-nalaikh-gold" />
-                <CardTitle className="dark:text-nalaikh-gold">{t.ecoEducation}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.ecoEducationDesc}</CardDescription>
+                <CardTitle className="dark:text-nalaikh-gold">
+                  {t.ecoEducation}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.ecoEducationDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20 dark:hover:bg-nalaikh-navy/30">
               <CardHeader>
                 <Leaf className="h-10 w-10 text-green-500 mb-4 dark:text-nalaikh-gold" />
-                <CardTitle className="dark:text-nalaikh-gold">{t.greenTech}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.greenTechDesc}</CardDescription>
+                <CardTitle className="dark:text-nalaikh-gold">
+                  {t.greenTech}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.greenTechDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -673,8 +758,12 @@ export default function HomePage() {
                     <span className="text-xs font-bold text-white">1</span>
                   </div>
                 </div>
-                <CardTitle className="text-lg font-bold text-white mb-3">{t.industrialPark}</CardTitle>
-                <CardDescription className="text-blue-100">{t.industrialParkDesc}</CardDescription>
+                <CardTitle className="text-lg font-bold text-white mb-3">
+                  {t.industrialPark}
+                </CardTitle>
+                <CardDescription className="text-blue-100">
+                  {t.industrialParkDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
 
@@ -688,8 +777,12 @@ export default function HomePage() {
                     <span className="text-xs font-bold text-white">2</span>
                   </div>
                 </div>
-                <CardTitle className="text-lg font-bold text-white mb-3">{t.urbanDevelopment}</CardTitle>
-                <CardDescription className="text-blue-100">{t.urbanDevelopmentDesc}</CardDescription>
+                <CardTitle className="text-lg font-bold text-white mb-3">
+                  {t.urbanDevelopment}
+                </CardTitle>
+                <CardDescription className="text-blue-100">
+                  {t.urbanDevelopmentDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
 
@@ -703,8 +796,12 @@ export default function HomePage() {
                     <span className="text-xs font-bold text-white">3</span>
                   </div>
                 </div>
-                <CardTitle className="text-lg font-bold text-white mb-3">{t.economicZone}</CardTitle>
-                <CardDescription className="text-blue-100">{t.economicZoneDesc}</CardDescription>
+                <CardTitle className="text-lg font-bold text-white mb-3">
+                  {t.economicZone}
+                </CardTitle>
+                <CardDescription className="text-blue-100">
+                  {t.economicZoneDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
 
@@ -718,15 +815,21 @@ export default function HomePage() {
                     <span className="text-xs font-bold text-white">4</span>
                   </div>
                 </div>
-                <CardTitle className="text-lg font-bold text-white mb-3">{t.greenNalaikhProject}</CardTitle>
-                <CardDescription className="text-blue-100">{t.greenNalaikhDesc}</CardDescription>
+                <CardTitle className="text-lg font-bold text-white mb-3">
+                  {t.greenNalaikhProject}
+                </CardTitle>
+                <CardDescription className="text-blue-100">
+                  {t.greenNalaikhDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
             <div className="text-center mb-12">
-              <h3 className="text-2xl lg:text-3xl font-bold text-nalaikh-gold mb-4">{t.benefitsTitle}</h3>
+              <h3 className="text-2xl lg:text-3xl font-bold text-nalaikh-gold mb-4">
+                {t.benefitsTitle}
+              </h3>
               <p className="text-blue-100">{t.benefitsDesc}</p>
             </div>
 
@@ -735,7 +838,9 @@ export default function HomePage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-nalaikh-gold to-yellow-400 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-xl">💰</span>
                 </div>
-                <h4 className="text-base font-bold mb-2 text-white">{t.greenFinancing}</h4>
+                <h4 className="text-base font-bold mb-2 text-white">
+                  {t.greenFinancing}
+                </h4>
                 <p className="text-sm text-blue-100">{t.greenFinancingDesc}</p>
               </div>
 
@@ -743,7 +848,9 @@ export default function HomePage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-xl">📈</span>
                 </div>
-                <h4 className="text-base font-bold mb-2 text-white">{t.exportSupport}</h4>
+                <h4 className="text-base font-bold mb-2 text-white">
+                  {t.exportSupport}
+                </h4>
                 <p className="text-sm text-blue-100">{t.exportSupportDesc}</p>
               </div>
 
@@ -751,7 +858,9 @@ export default function HomePage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-xl">👥</span>
                 </div>
-                <h4 className="text-base font-bold mb-2 text-white">{t.jobCreation}</h4>
+                <h4 className="text-base font-bold mb-2 text-white">
+                  {t.jobCreation}
+                </h4>
                 <p className="text-sm text-blue-100">{t.jobCreationDesc}</p>
               </div>
 
@@ -759,7 +868,9 @@ export default function HomePage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-xl">🚀</span>
                 </div>
-                <h4 className="text-base font-bold mb-2 text-white">{t.newTechnology}</h4>
+                <h4 className="text-base font-bold mb-2 text-white">
+                  {t.newTechnology}
+                </h4>
                 <p className="text-sm text-blue-100">{t.newTechnologyDesc}</p>
               </div>
             </div>
@@ -768,19 +879,37 @@ export default function HomePage() {
           <div className="mt-16 text-center">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-nalaikh-gold mb-2">5+</div>
-                <div className="text-white font-semibold mb-1">{t.projectCoordination}</div>
-                <div className="text-sm text-blue-100">{t.projectCoordinationDesc}</div>
+                <div className="text-3xl font-bold text-nalaikh-gold mb-2">
+                  5+
+                </div>
+                <div className="text-white font-semibold mb-1">
+                  {t.projectCoordination}
+                </div>
+                <div className="text-sm text-blue-100">
+                  {t.projectCoordinationDesc}
+                </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-nalaikh-gold mb-2">100%</div>
-                <div className="text-white font-semibold mb-1">{t.livingEnvironment}</div>
-                <div className="text-sm text-blue-100">{t.livingEnvironmentDesc}</div>
+                <div className="text-3xl font-bold text-nalaikh-gold mb-2">
+                  100%
+                </div>
+                <div className="text-white font-semibold mb-1">
+                  {t.livingEnvironment}
+                </div>
+                <div className="text-sm text-blue-100">
+                  {t.livingEnvironmentDesc}
+                </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-nalaikh-gold mb-2">∞</div>
-                <div className="text-white font-semibold mb-1">{t.developmentModel}</div>
-                <div className="text-sm text-blue-100">{t.developmentModelDesc}</div>
+                <div className="text-3xl font-bold text-nalaikh-gold mb-2">
+                  ∞
+                </div>
+                <div className="text-white font-semibold mb-1">
+                  {t.developmentModel}
+                </div>
+                <div className="text-sm text-blue-100">
+                  {t.developmentModelDesc}
+                </div>
               </div>
             </div>
           </div>
@@ -802,23 +931,41 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <Card className="text-center border-0 shadow-lg dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20">
               <CardHeader>
-                <div className="text-4xl font-bold text-nalaikh-navy mb-2 dark:text-nalaikh-gold">15,000</div>
-                <CardTitle className="text-lg dark:text-white">{t.totalHouseholds}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.totalHouseholdsDesc}</CardDescription>
+                <div className="text-4xl font-bold text-nalaikh-navy mb-2 dark:text-nalaikh-gold">
+                  15,000
+                </div>
+                <CardTitle className="text-lg dark:text-white">
+                  {t.totalHouseholds}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.totalHouseholdsDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card className="text-center border-0 shadow-lg dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20">
               <CardHeader>
-                <div className="text-4xl font-bold text-nalaikh-red mb-2 dark:text-nalaikh-gold">35%</div>
-                <CardTitle className="text-lg dark:text-white">{t.downPaymentCapable}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.downPaymentCapableDesc}</CardDescription>
+                <div className="text-4xl font-bold text-nalaikh-red mb-2 dark:text-nalaikh-gold">
+                  35%
+                </div>
+                <CardTitle className="text-lg dark:text-white">
+                  {t.downPaymentCapable}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.downPaymentCapableDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card className="text-center border-0 shadow-lg dark:bg-nalaikh-navy/20 dark:border-nalaikh-gold/20">
               <CardHeader>
-                <div className="text-4xl font-bold text-nalaikh-navy mb-2 dark:text-nalaikh-gold">87%</div>
-                <CardTitle className="text-lg dark:text-white">{t.noDownPayment}</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.noDownPaymentDesc}</CardDescription>
+                <div className="text-4xl font-bold text-nalaikh-navy mb-2 dark:text-nalaikh-gold">
+                  87%
+                </div>
+                <CardTitle className="text-lg dark:text-white">
+                  {t.noDownPayment}
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.noDownPaymentDesc}
+                </CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -829,19 +976,33 @@ export default function HomePage() {
                 <CardTitle className="text-2xl lg:text-3xl font-bold text-nalaikh-navy dark:text-nalaikh-gold">
                   15,000
                 </CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.housingShortage}</CardDescription>
+                <CardDescription className="dark:text-gray-300">
+                  {t.housingShortage}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-xl lg:text-2xl font-bold text-green-600">35%</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">{t.downPaymentCapable}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">{t.downPaymentCapableDesc}</div>
+                    <div className="text-xl lg:text-2xl font-bold text-green-600">
+                      35%
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      {t.downPaymentCapable}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      {t.downPaymentCapableDesc}
+                    </div>
                   </div>
                   <div>
-                    <div className="text-xl lg:text-2xl font-bold text-orange-600">87%</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">{t.noDownPayment}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">{t.noDownPaymentDesc}</div>
+                    <div className="text-xl lg:text-2xl font-bold text-orange-600">
+                      87%
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      {t.noDownPayment}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      {t.noDownPaymentDesc}
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -849,13 +1010,19 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-lg dark:bg-gray-700">
               <CardHeader>
-                <CardTitle className="text-2xl lg:text-3xl font-bold text-blue-600">70,000</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.mortgageDemand}</CardDescription>
+                <CardTitle className="text-2xl lg:text-3xl font-bold text-blue-600">
+                  70,000
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.mortgageDemand}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="dark:text-gray-300">{t.totalBorrowers}</span>
+                    <span className="dark:text-gray-300">
+                      {t.totalBorrowers}
+                    </span>
                     <span className="font-bold dark:text-white">100%</span>
                   </div>
                   <div className="flex justify-between">
@@ -872,8 +1039,12 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-lg dark:bg-gray-700">
               <CardHeader>
-                <CardTitle className="text-2xl lg:text-3xl font-bold text-nalaikh-red">₮ 5.4 ТБ</CardTitle>
-                <CardDescription className="dark:text-gray-300">{t.totalRisk}</CardDescription>
+                <CardTitle className="text-2xl lg:text-3xl font-bold text-nalaikh-red">
+                  ₮ 5.4 ТБ
+                </CardTitle>
+                <CardDescription className="dark:text-gray-300">
+                  {t.totalRisk}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm dark:text-gray-300">
@@ -907,32 +1078,52 @@ export default function HomePage() {
               </h3>
               <div className="space-y-4">
                 <div className="bg-red-50 p-4 rounded-lg dark:bg-red-900/20">
-                  <div className="text-base lg:text-lg font-bold text-red-600 mb-2">{t.currentProblem}</div>
-                  <div className="text-sm text-gray-700 dark:text-gray-300">{t.currentProblemDesc}</div>
+                  <div className="text-base lg:text-lg font-bold text-red-600 mb-2">
+                    {t.currentProblem}
+                  </div>
+                  <div className="text-sm text-gray-700 dark:text-gray-300">
+                    {t.currentProblemDesc}
+                  </div>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg dark:bg-green-900/20">
-                  <div className="text-base lg:text-lg font-bold text-green-600 mb-2">{t.solution}</div>
-                  <div className="text-sm text-gray-700 dark:text-gray-300">{t.solutionDesc}</div>
+                  <div className="text-base lg:text-lg font-bold text-green-600 mb-2">
+                    {t.solution}
+                  </div>
+                  <div className="text-sm text-gray-700 dark:text-gray-300">
+                    {t.solutionDesc}
+                  </div>
                 </div>
               </div>
             </div>
             <div>
               <Card className="border-0 shadow-lg dark:bg-gray-800">
                 <CardHeader>
-                  <CardTitle className="dark:text-white">{t.priceComparison}</CardTitle>
+                  <CardTitle className="dark:text-white">
+                    {t.priceComparison}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center p-3 bg-red-50 rounded dark:bg-red-900/20">
-                      <span className="dark:text-gray-300">{t.bankLoanPrice}</span>
-                      <span className="font-bold text-red-600">₮240,000,000</span>
+                      <span className="dark:text-gray-300">
+                        {t.bankLoanPrice}
+                      </span>
+                      <span className="font-bold text-red-600">
+                        ₮240,000,000
+                      </span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-green-50 rounded dark:bg-green-900/20">
-                      <span className="dark:text-gray-300">{t.preOrderPrice}</span>
-                      <span className="font-bold text-green-600">₮164,000,000</span>
+                      <span className="dark:text-gray-300">
+                        {t.preOrderPrice}
+                      </span>
+                      <span className="font-bold text-green-600">
+                        ₮164,000,000
+                      </span>
                     </div>
                     <div className="text-center p-3 bg-blue-50 rounded dark:bg-blue-900/20">
-                      <div className="text-base lg:text-lg font-bold text-blue-600">{t.actualSavings}</div>
+                      <div className="text-base lg:text-lg font-bold text-blue-600">
+                        {t.actualSavings}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -943,49 +1134,65 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-6">
             <Card className="border-0 shadow-lg dark:bg-gray-800">
               <CardHeader>
-                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">01</CardTitle>
+                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">
+                  01
+                </CardTitle>
                 <CardDescription className="text-center font-bold dark:text-gray-300">
                   {t.downPaymentInsurance}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 text-center dark:text-gray-300">{t.downPaymentInsuranceDesc}</p>
+                <p className="text-sm text-gray-600 text-center dark:text-gray-300">
+                  {t.downPaymentInsuranceDesc}
+                </p>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg dark:bg-gray-800">
               <CardHeader>
-                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">02</CardTitle>
+                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">
+                  02
+                </CardTitle>
                 <CardDescription className="text-center font-bold dark:text-gray-300">
                   {t.corporateFinancing}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 text-center dark:text-gray-300">{t.corporateFinancingDesc}</p>
+                <p className="text-sm text-gray-600 text-center dark:text-gray-300">
+                  {t.corporateFinancingDesc}
+                </p>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg dark:bg-gray-800">
               <CardHeader>
-                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">03</CardTitle>
+                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">
+                  03
+                </CardTitle>
                 <CardDescription className="text-center font-bold dark:text-gray-300">
                   {t.fundingSources}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 text-center dark:text-gray-300">{t.fundingSourcesDesc}</p>
+                <p className="text-sm text-gray-600 text-center dark:text-gray-300">
+                  {t.fundingSourcesDesc}
+                </p>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg dark:bg-gray-800">
               <CardHeader>
-                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">04</CardTitle>
+                <CardTitle className="text-center text-nalaikh-navy dark:text-nalaikh-gold">
+                  04
+                </CardTitle>
                 <CardDescription className="text-center font-bold dark:text-gray-300">
                   {t.passiveHousing}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 text-center dark:text-gray-300">{t.passiveHousingDesc}</p>
+                <p className="text-sm text-gray-600 text-center dark:text-gray-300">
+                  {t.passiveHousingDesc}
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -1048,8 +1255,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 dark:text-nalaikh-gold">{t.contact}</h2>
-              <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{t.contactDesc}</p>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 dark:text-nalaikh-gold">
+                {t.contact}
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {t.contactDesc}
+              </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -1062,7 +1273,9 @@ export default function HomePage() {
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">
                     {t.officeLocation}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{t.address}</p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {t.address}
+                  </p>
                 </CardContent>
               </Card>
 
@@ -1072,9 +1285,15 @@ export default function HomePage() {
                   <div className="w-16 h-16 bg-nalaikh-navy/10 dark:bg-nalaikh-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Phone className="h-8 w-8 text-nalaikh-navy dark:text-nalaikh-gold" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">{t.phoneContact}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">+976 11 123 456</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">{t.businessHours}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">
+                    {t.phoneContact}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                    +976 7755 85888
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
+                    {t.businessHours}
+                  </p>
                 </CardContent>
               </Card>
 
@@ -1084,9 +1303,15 @@ export default function HomePage() {
                   <div className="w-16 h-16 bg-nalaikh-navy/10 dark:bg-nalaikh-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Mail className="h-8 w-8 text-nalaikh-navy dark:text-nalaikh-gold" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">{t.emailContact}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">info@ncdc.mn</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">{t.responseTime}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">
+                    {t.emailContact}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                    info@ncdc.mn
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
+                    {t.responseTime}
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -1097,10 +1322,14 @@ export default function HomePage() {
                 <h3 className="text-2xl font-semibold text-gray-900 mb-6 dark:text-nalaikh-gold">
                   {t.partnershipOpportunities}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">{t.partnershipDesc}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+                  {t.partnershipDesc}
+                </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <div className="bg-white dark:bg-nalaikh-navy/30 px-6 py-3 rounded-full shadow-md">
-                    <span className="text-nalaikh-navy dark:text-nalaikh-gold font-medium">{t.greenFinancing}</span>
+                    <span className="text-nalaikh-navy dark:text-nalaikh-gold font-medium">
+                      {t.greenFinancing}
+                    </span>
                   </div>
                   <div className="bg-white dark:bg-nalaikh-navy/30 px-6 py-3 rounded-full shadow-md">
                     <span className="text-nalaikh-navy dark:text-nalaikh-gold font-medium">
@@ -1108,7 +1337,9 @@ export default function HomePage() {
                     </span>
                   </div>
                   <div className="bg-white dark:bg-nalaikh-navy/30 px-6 py-3 rounded-full shadow-md">
-                    <span className="text-nalaikh-navy dark:text-nalaikh-gold font-medium">{t.urbanPlanning}</span>
+                    <span className="text-nalaikh-navy dark:text-nalaikh-gold font-medium">
+                      {t.urbanPlanning}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1123,13 +1354,22 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <img src={NcdcLogo.src} alt="NCDC Logo" className="h-10 w-max" />
-                <span className="text-lg font-bold dark:text-nalaikh-gold">NCDC</span>
+                <Image
+                  src={NcdcLogo.src}
+                  alt="NCDC Logo"
+                  width={40}
+                  height={40}
+                />
+                <span className="text-lg font-bold dark:text-nalaikh-gold">
+                  NCDC
+                </span>
               </div>
               <p className="text-blue-100 dark:text-gray-300">{t.company}</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">{t.projects}</h4>
+              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">
+                {t.projects}
+              </h4>
               <ul className="space-y-2 text-blue-100 dark:text-gray-300">
                 <li>{t.greenNalaikh}</li>
                 <li>{t.industrialPark}</li>
@@ -1137,7 +1377,9 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">{t.services}</h4>
+              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">
+                {t.services}
+              </h4>
               <ul className="space-y-2 text-blue-100 dark:text-gray-300">
                 <li>{t.urbanPlanning}</li>
                 <li>{t.greenFinancing}</li>
@@ -1145,7 +1387,9 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">{t.contact}</h4>
+              <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">
+                {t.contact}
+              </h4>
               <div className="space-y-2 text-blue-100 dark:text-gray-300">
                 <p>{t.address}</p>
                 <p>+976 11 123 456</p>
@@ -1161,5 +1405,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
