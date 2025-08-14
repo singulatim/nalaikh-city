@@ -1392,7 +1392,7 @@ export default function HomePage() {
               </h4>
               <div className="space-y-2 text-blue-100 dark:text-gray-300">
                 <p>{t.address}</p>
-                <p>+976 11 123 456</p>
+                <p>+976 7755 85888</p>
                 <p>info@ncdc.mn</p>
               </div>
             </div>
