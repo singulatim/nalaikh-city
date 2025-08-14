@@ -19,6 +19,7 @@ import {
   Leaf,
 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Link from "next/link"
 import NalaikhLogo from "@/assets/logos/nalaikh-logo.png"
 import NcdcLogo from "@/assets/logos/ncdc-logo.png"
 import CityImage from "@/assets/images/nalaikh-city.jpg"
@@ -31,6 +32,7 @@ const translations = {
     company: "Налайх хотын хөгжлийн корпораци",
     greenNalaikh: "Ногоон Налайх",
     projects: "Төслүүд",
+    posts: "Мэдээ",
     financing: "Санхүүжилт",
     contact: "Холбоо барих",
     getQuote: "Санал авах",
@@ -179,6 +181,7 @@ const translations = {
     company: "Nalaikh City Development Corporation",
     greenNalaikh: "Green Nalaikh",
     projects: "Projects",
+    posts: "News",
     financing: "Financing",
     contact: "Contact",
     getQuote: "Get Quote",
@@ -327,6 +330,7 @@ const translations = {
     company: "纳来哈市发展公司",
     greenNalaikh: "绿色纳来哈",
     projects: "项目",
+    posts: "新闻",
     financing: "融资",
     contact: "联系我们",
     getQuote: "获取报价",
@@ -509,6 +513,7 @@ export default function HomePage() {
               {[
                 { key: "greenNalaikh", href: "#green-nalaikh" },
                 { key: "projects", href: "#projects" },
+                { key: "posts", href: "/posts" },
                 { key: "housing", href: "#housing" },
                 { key: "financing", href: "#financing" },
                 { key: "contact", href: "#contact" },
@@ -518,8 +523,10 @@ export default function HomePage() {
                   href={item.href}
                   className="text-gray-600 hover:text-nalaikh-navy transition-colors dark:text-nalaikh-gold/80 dark:hover:text-nalaikh-gold"
                   onClick={(e) => {
-                    e.preventDefault()
-                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" })
+                    if (item.href.startsWith('#')) {
+                      e.preventDefault()
+                      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" })
+                    }
                   }}
                 >
                   {t[item.key as keyof typeof t]}
@@ -1139,6 +1146,7 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">{t.services}</h4>
               <ul className="space-y-2 text-blue-100 dark:text-gray-300">
+                <li><Link href="/posts" className="hover:text-white transition-colors">{t.news}</Link></li>
                 <li>{t.urbanPlanning}</li>
                 <li>{t.greenFinancing}</li>
                 <li>{t.sustainableDevelopment}</li>
