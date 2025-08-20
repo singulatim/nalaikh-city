@@ -1,16 +1,14 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   MapPin,
   Phone,
@@ -24,19 +22,19 @@ import {
   Waves,
   GraduationCap,
   Leaf,
-} from "lucide-react";
+} from "lucide-react"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import NcdcLogo from "@/assets/logos/ncdc-logo.jpg";
-import CityImage from "@/assets/images/nalaikh-city.jpg";
+} from "@/components/ui/select"
+import NcdcLogo from "@/assets/logos/ncdc-logo.jpg"
+import CityImage from "@/assets/images/nalaikh-city.jpg"
 
-type Language = "mn" | "en" | "zh";
-type Theme = "light" | "dark";
+type Language = "mn" | "en" | "zh"
+type Theme = "light" | "dark"
 
 const translations = {
   mn: {
@@ -511,17 +509,17 @@ const translations = {
     partnershipDesc:
       "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
   },
-};
+}
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("mn");
-  const [theme, setTheme] = useState<Theme>("light");
+  const [language, setLanguage] = useState<Language>("mn")
+  const [theme, setTheme] = useState<Theme>("light")
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
+    document.documentElement.classList.toggle("dark", theme === "dark")
+  }, [theme])
 
-  const t = translations[language];
+  const t = translations[language]
 
   // const scrollToSection = (sectionId: string) => {
   //   const element = document.getElementById(sectionId)
@@ -569,10 +567,10 @@ export default function HomePage() {
                   href={item.href}
                   className="text-gray-600 hover:text-nalaikh-navy transition-colors dark:text-nalaikh-gold/80 dark:hover:text-nalaikh-gold"
                   onClick={(e) => {
-                    e.preventDefault();
+                    e.preventDefault()
                     document
                       .querySelector(item.href)
-                      ?.scrollIntoView({ behavior: "smooth" });
+                      ?.scrollIntoView({ behavior: "smooth" })
                   }}
                 >
                   {t[item.key as keyof typeof t]}
@@ -1405,5 +1403,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  );
+  )
 }
