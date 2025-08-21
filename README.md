@@ -6,12 +6,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -19,6 +13,34 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+### Production
+
+To run the production server locally:
+
+```bash
+npm start
+```
+
+The start script automatically builds the app (runs `next build`) before starting. This prevents the error: "Could not find a production build in the '.next' directory."
+
+## Code Quality (ESLint)
+
+This project is configured with ESLint (Flat Config) using Next.js recommended rules.
+
+- Lint the project:
+
+```bash
+npm run lint
+```
+
+- Automatically fix fixable issues:
+
+```bash
+npm run lint:fix
+```
+
+The ESLint config lives in `eslint.config.mjs`. Generated/build files are ignored.
 
 ## Learn More
 
