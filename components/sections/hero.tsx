@@ -1,10 +1,8 @@
 "use client"
 
 import CityImage from "@/assets/images/nalaikh-city.jpg"
-import {Button} from "@/components/ui/button"
 import {Translate} from "@/lib/_types"
-import {ArrowRight, Leaf} from "lucide-react"
-import {Spotlights} from "@/components/ui/spotlight"
+import {Leaf} from "lucide-react"
 
 
 export default function HeroSection({t}: Translate) {

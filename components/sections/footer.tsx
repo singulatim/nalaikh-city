@@ -4,7 +4,6 @@ import Image from 'next/image';
 import CompanyLogo from "@/assets/logos/ncdc-logo.jpg";
 import { Translate } from "@/lib/_types";
 
-
 export default function Footer({t}: Translate) {
   return (
        <footer className="bg-nalaikh-navy text-white py-12 dark:bg-gray-900 dark:border-t dark:border-nalaikh-gold/20">
@@ -37,8 +36,8 @@ export default function Footer({t}: Translate) {
               <h4 className="font-semibold mb-4 dark:text-nalaikh-gold">{t.contact}</h4>
               <div className="space-y-2 text-blue-100 dark:text-gray-300">
                 <p>{t.address}</p>
-                <p>+976 11 123 456</p>
-                <p>info@ncdc.mn</p>
+                <p>{t.phone}</p>
+                <p>{t.email}</p>
               </div>
             </div>
           </div>

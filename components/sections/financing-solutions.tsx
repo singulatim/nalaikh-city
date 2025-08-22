@@ -3,8 +3,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Translate } from "@/lib/_types"
 
-
-
 export default function FinancingSolutionsSection({t}: Translate) {
   return (
     <section id="financing" className="py-20 bg-white dark:bg-gray-900">

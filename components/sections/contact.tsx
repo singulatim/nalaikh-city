@@ -42,7 +42,7 @@ export default function ContactSection({t}: Translate) {
                     <Phone className="h-8 w-8 text-nalaikh-navy dark:text-nalaikh-gold" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 dark:text-nalaikh-gold">{t.phoneContact}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">+976 11 123 456</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">{t.phone}</p>
                   <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">{t.businessHours}</p>
                 </CardContent>
               </Card>

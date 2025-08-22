@@ -112,9 +112,9 @@ export const translations = {
     phase3: "3-р үе шат: Үр дүн",
 
     // Contact & Footer
-    address: "Улаанбаатар, Налайх дүүрэг",
+    address: "Улаанбаатар хот, Баянзүрх дүүрэг, 26 дугаар хороо, Хүннүгийн гудамж, MAY SEVEN, 202 тоот",
     email: "info@ncdc.mn",
-    phone: "+976 11 123456",
+    phone: "+976 7755 85888",
     newsletter: "Мэдээллийн товхимол",
     subscribe: "Бүртгүүлэх",
     aboutUs: "Бидний тухай",
@@ -257,9 +257,9 @@ export const translations = {
     phase3: "Phase 3: Results",
 
     // Contact & Footer
-    address: "Ulaanbaatar, Nalaikh District",
+    address: "Ulaanbaatar, Bayanzurkh District, 26th khoroo, Hunnugiin Street, MAY SEVEN, Room 202",
     email: "info@ncdc.mn",
-    phone: "+976 11 123456",
+    phone: "+976 7755 85888",
     newsletter: "Newsletter",
     subscribe: "Subscribe",
     aboutUs: "About Us",
@@ -292,7 +292,7 @@ export const translations = {
       "We are seeking opportunities to collaborate in green finance, sustainable development, and urban planning.",
   },
   zh: {
-    company: "纳来哈市发展公司",
+    company: "Nalaikh City Development Corporation",
     greenNalaikh: "绿色纳来哈",
     housing: "住房",
     projects: "项目",
@@ -401,9 +401,9 @@ export const translations = {
     phase3: "第三阶段：成果",
 
     // Contact & Footer
-    address: "乌兰巴托，纳来哈区",
+    address: " 乌兰巴托市，巴彦卓尔区，第26区，胡努街，MAY SEVEN，202室",
     email: "info@ncdc.mn",
-    phone: "+976 11 123456",
+    phone: "+976 7755 85888",
     newsletter: "订阅通讯",
     subscribe: "订阅",
     aboutUs: "关于我们",
