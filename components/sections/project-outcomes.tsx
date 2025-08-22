@@ -12,7 +12,6 @@ import { Translate } from "@/lib/_types"
 
 
 export default function ProjectOutcomesSection({t}: Translate) {
-
   return (
       <section
         id="projects"
