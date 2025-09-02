@@ -9,17 +9,36 @@ import Media from './collections/Media'
 export default buildConfig({
   admin: {
     user: 'users',
-    bundler: 'webpack',
+    meta: {
+      titleSuffix: '- NCDC Admin',
+      favicon: '/favicon.ico',
+    },
+    dateFormat: 'dd/MM/yyyy',
   },
   collections: [
     Posts,
     Media,
     {
       slug: 'users',
-      auth: true,
+      auth: {
+        depth: 0,
+        verify: false,
+        maxLoginAttempts: 5,
+        lockTime: 600 * 1000, // 10 minutes
+      },
       access: {
-        delete: () => false,
-        update: () => true,
+        delete: ({ req }) => {
+          // Only allow deletion of users for super admins
+          return req.user?.role === 'admin'
+        },
+        update: ({ req, id }) => {
+          // Users can update their own profile, admins can update any
+          return req.user?.role === 'admin' || req.user?.id === id
+        },
+        read: ({ req }) => {
+          // Only authenticated users can read users
+          return Boolean(req.user)
+        },
       },
       fields: [
         {
@@ -31,8 +50,25 @@ export default buildConfig({
           ],
           defaultValue: 'editor',
           required: true,
+          access: {
+            update: ({ req }) => req.user?.role === 'admin',
+          },
+        },
+        {
+          name: 'firstName',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'lastName',
+          type: 'text',
+          required: true,
         },
       ],
+      admin: {
+        useAsTitle: 'email',
+        defaultColumns: ['firstName', 'lastName', 'email', 'role'],
+      },
     },
   ],
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret-key',
@@ -41,10 +77,31 @@ export default buildConfig({
   },
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || 'mongodb://localhost:27017/nalaikh-city',
+    connectOptions: {
+      dbName: 'nalaikh-city',
+    },
   }),
-  editor: lexicalEditor({}),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      // Add any additional features here if needed
+    ],
+  }),
   localization: {
-    locales: ['en', 'mn', 'zh'],
+    locales: [
+      {
+        label: 'Mongolian',
+        code: 'mn',
+      },
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Chinese',
+        code: 'zh',
+      },
+    ],
     defaultLocale: 'mn',
     fallback: true,
   },
@@ -56,4 +113,9 @@ export default buildConfig({
     'http://localhost:3000',
     'https://your-production-domain.com', // Replace with your production domain
   ],
+  upload: {
+    limits: {
+      fileSize: 5 * 1024 * 1024, // 5MB
+    },
+  },
 })

@@ -72,7 +72,7 @@ type Language = "mn" | "en" | "zh";
 export default function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [language, setLanguage] = useState<Language>("mn");
@@ -123,7 +123,7 @@ export default function PostsPage() {
         locale: language,
       });
 
-      if (category) {
+      if (category && category !== "all") {
         params.append("category", category);
       }
 
@@ -186,7 +186,7 @@ export default function PostsPage() {
                 <SelectValue placeholder={t.allCategories} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">{t.allCategories}</SelectItem>
+                <SelectItem value="all">{t.allCategories}</SelectItem>
                 {Object.entries(categoryLabels).map(([key, labels]) => (
                   <SelectItem key={key} value={key}>
                     {labels[language]}
