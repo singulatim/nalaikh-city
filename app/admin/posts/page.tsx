@@ -72,12 +72,12 @@ export default function PostsManagement() {
         limit: "10",
       })
 
-      // Add filters
+      // Add filters using Payload's where clause format
       if (statusFilter !== "all") {
-        params.append("status", statusFilter)
+        params.append("where[status][equals]", statusFilter)
       }
       if (categoryFilter !== "all") {
-        params.append("category", categoryFilter)
+        params.append("where[category][equals]", categoryFilter)
       }
 
       const response = await fetch(`/api/payload/posts?${params}`, {
@@ -251,7 +251,7 @@ export default function PostsManagement() {
               <div className="text-gray-500 mb-4">
                 <Search className="h-12 w-12 mx-auto mb-4 text-gray-300" />
                 <p className="text-lg font-medium">Нийтлэл олдсонгүй</p>
-                <p>Хайлга эсвэл шүүлтүүреэ засч үзнэ үү</p>
+                <p>Хайлт эсвэл шүүлтүүрийг засч үзнэ үү</p>
               </div>
               <Link href="/admin/posts/create">
                 <Button className="gap-2">

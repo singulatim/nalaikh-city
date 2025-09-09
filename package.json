@@ -11,11 +11,10 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "test": "echo \"No tests specified\" && exit 0",
     "tsc:check": "tsc --noEmit",
-    "check:local": "npm run test && npm run lint && npm run tsc:check"
+    "check:local": "npm run test && npm run lint && npm run tsc:check",
+    "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
-    "tailwindcss-animate": "^1.0.7",
-    "@uidotdev/usehooks": "^2.4.1",
     "@lingui/core": "^5.4.1",
     "@lingui/react": "^5.4.1",
     "@payloadcms/db-mongodb": "^3.51.0",
@@ -26,6 +25,7 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@types/sharp": "^0.31.1",
+    "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.1",
@@ -36,7 +36,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.34.3",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "9.12.0",
@@ -51,6 +52,7 @@
     "eslint-config-next": "15.2.4",
     "postcss": "8.4.47",
     "tailwindcss": "^4.0.0",
+    "tsx": "^4.20.5",
     "typescript": "5.6.2"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { 
@@ -44,26 +44,123 @@ interface MediaResponse {
   limit: number
 }
 
+// Lazy Loading Image Component
+const LazyImage = ({ src, alt, className, ...props }: { src: string; alt: string; className?: string; [key: string]: any }) => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
+  const [isInView, setIsInView] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={imgRef} className={`relative ${className}`} {...props}>
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-100 animate-pulse flex items-center justify-center">
+          <ImageIcon className="h-8 w-8 text-gray-300" />
+        </div>
+      )}
+      {hasError && (
+        <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+          <ImageIcon className="h-8 w-8 text-red-300" />
+        </div>
+      )}
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          onLoad={() => setIsLoading(false)}
+          onError={() => {
+            setIsLoading(false)
+            setHasError(true)
+          }}
+        />
+      )}
+    </div>
+  )
+}
+
 export default function MediaManagement() {
   const [media, setMedia] = useState<MediaFile[]>([])
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({})
+  const [dragActive, setDragActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [selectedFiles, setSelectedFiles] = useState<Set<string>>(new Set())
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [totalDocs, setTotalDocs] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
   
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fetchMedia()
+  }, [])
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      loadMoreMedia()
+    }
   }, [currentPage])
 
-  const fetchMedia = async () => {
+  const fetchMedia = async (reset = true) => {
     try {
-      setLoading(true)
+      if (reset) {
+        setLoading(true)
+        setCurrentPage(1)
+      }
+      
+      const params = new URLSearchParams({
+        page: "1",
+        limit: "20",
+      })
+
+      const response = await fetch(`/api/payload/media?${params}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      
+      if (response.ok) {
+        const data: MediaResponse = await response.json()
+        setMedia(data.docs)
+        // setTotalPages(data.totalPages) // Not used with infinite scroll
+        setTotalDocs(data.totalDocs)
+        setHasMore(data.totalPages > 1)
+      }
+    } catch (error) {
+      console.error('Failed to fetch media:', error)
+    } finally {
+      if (reset) setLoading(false)
+    }
+  }
+
+  const loadMoreMedia = async () => {
+    if (loadingMore || !hasMore) return
+    
+    try {
+      setLoadingMore(true)
       const params = new URLSearchParams({
         page: currentPage.toString(),
         limit: "20",
@@ -77,46 +174,112 @@ export default function MediaManagement() {
       
       if (response.ok) {
         const data: MediaResponse = await response.json()
-        setMedia(data.docs)
-        setTotalPages(data.totalPages)
-        setTotalDocs(data.totalDocs)
+        setMedia(prev => [...prev, ...data.docs])
+        setHasMore(currentPage < data.totalPages)
       }
     } catch (error) {
-      console.error('Failed to fetch media:', error)
+      console.error('Failed to load more media:', error)
     } finally {
-      setLoading(false)
+      setLoadingMore(false)
     }
   }
+
+  // Infinite scroll handler
+  const handleScroll = useCallback(() => {
+    if (window.innerHeight + document.documentElement.scrollTop 
+        >= document.documentElement.offsetHeight - 1000) {
+      if (hasMore && !loadingMore) {
+        setCurrentPage(prev => prev + 1)
+      }
+    }
+  }, [hasMore, loadingMore])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   const handleFileUpload = async (files: FileList) => {
     if (files.length === 0) return
 
+    // Validate files
+    const validFiles = Array.from(files).filter(file => {
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
+      const maxSize = 5 * 1024 * 1024 // 5MB
+      
+      if (!validTypes.includes(file.type)) {
+        alert(`${file.name}: Invalid file type. Please upload images only.`)
+        return false
+      }
+      
+      if (file.size > maxSize) {
+        alert(`${file.name}: File too large. Please upload files smaller than 5MB.`)
+        return false
+      }
+      
+      return true
+    })
+
+    if (validFiles.length === 0) return
+
     setUploading(true)
+    const newProgress: {[key: string]: number} = {}
     
     try {
-      for (const file of Array.from(files)) {
+      // Upload files concurrently
+      const uploadPromises = validFiles.map(async (file) => {
+        const fileKey = `${file.name}-${file.size}`
+        newProgress[fileKey] = 0
+        setUploadProgress({...newProgress})
+        
         const formData = new FormData()
         formData.append('file', file)
         formData.append('alt', file.name)
 
-        const response = await fetch('/api/payload/media', {
-          method: 'POST',
-          body: formData,
+        return new Promise<void>((resolve, reject) => {
+          const xhr = new XMLHttpRequest()
+          
+          xhr.upload.onprogress = (e) => {
+            if (e.lengthComputable) {
+              const percentComplete = Math.round((e.loaded / e.total) * 100)
+              setUploadProgress(prev => ({
+                ...prev,
+                [fileKey]: percentComplete
+              }))
+            }
+          }
+          
+          xhr.onload = () => {
+            if (xhr.status === 200 || xhr.status === 201) {
+              setUploadProgress(prev => {
+                const newPrev = {...prev}
+                delete newPrev[fileKey]
+                return newPrev
+              })
+              resolve()
+            } else {
+              reject(new Error(`Failed to upload ${file.name}`))
+            }
+          }
+          
+          xhr.onerror = () => reject(new Error(`Network error uploading ${file.name}`))
+          
+          xhr.open('POST', '/api/payload/media')
+          xhr.send(formData)
         })
-
-        if (!response.ok) {
-          console.error(`Failed to upload ${file.name}`)
-        }
-      }
+      })
+      
+      await Promise.allSettled(uploadPromises)
       
       // Refresh media list
-      fetchMedia()
+      await fetchMedia(true)
       
     } catch (error) {
       console.error('Error uploading files:', error)
       alert('Failed to upload some files')
     } finally {
       setUploading(false)
+      setUploadProgress({})
     }
   }
 
@@ -128,7 +291,7 @@ export default function MediaManagement() {
         })
         
         if (response.ok) {
-          fetchMedia()
+          fetchMedia(true)
         } else {
           alert('Failed to delete media file')
         }
@@ -151,7 +314,7 @@ export default function MediaManagement() {
         }
         
         setSelectedFiles(new Set())
-        fetchMedia()
+        fetchMedia(true)
       } catch (error) {
         console.error('Error bulk deleting media:', error)
         alert('Failed to delete some files')
@@ -279,19 +442,54 @@ export default function MediaManagement() {
         {/* Upload Area */}
         <div className="mb-8">
           <div 
-            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors cursor-pointer"
+            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+              dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+            }`}
             onClick={() => fileInputRef.current?.click()}
-            onDragOver={(e) => e.preventDefault()}
+            onDragOver={(e) => {
+              e.preventDefault()
+              setDragActive(true)
+            }}
+            onDragLeave={(e) => {
+              e.preventDefault()
+              setDragActive(false)
+            }}
             onDrop={(e) => {
               e.preventDefault()
+              setDragActive(false)
               handleFileUpload(e.dataTransfer.files)
             }}
           >
             <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600 mb-2">Drop files here or click to upload</p>
+            <p className={`mb-2 ${dragActive ? 'text-blue-600' : 'text-gray-600'}`}>
+              {dragActive ? 'Release to upload files' : 'Drop files here or click to upload'}
+            </p>
             <p className="text-sm text-gray-500">
               Supports: JPG, PNG, GIF, WebP up to 5MB
             </p>
+            
+            {/* Upload Progress */}
+            {Object.keys(uploadProgress).length > 0 && (
+              <div className="mt-4 space-y-2">
+                {Object.entries(uploadProgress).map(([fileKey, progress]) => {
+                  const fileName = fileKey.split('-')[0]
+                  return (
+                    <div key={fileKey} className="text-left">
+                      <div className="flex justify-between text-sm">
+                        <span className="truncate">{fileName}</span>
+                        <span>{progress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
           
           <input
@@ -334,7 +532,7 @@ export default function MediaManagement() {
               >
                 <CardContent className="p-0">
                   <div className="relative">
-                    <img
+                    <LazyImage
                       src={file.sizes?.thumbnail?.url || file.url}
                       alt={file.alt}
                       className="w-full h-32 object-cover rounded-t-md"
@@ -421,7 +619,7 @@ export default function MediaManagement() {
                       className="rounded mr-4"
                     />
                     
-                    <img
+                    <LazyImage
                       src={file.sizes?.thumbnail?.url || file.url}
                       alt={file.alt}
                       className="w-12 h-12 object-cover rounded mr-4"
@@ -479,28 +677,17 @@ export default function MediaManagement() {
           </Card>
         )}
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </Button>
-            
-            <span className="text-sm text-gray-600">
-              Page {currentPage} of {totalPages}
-            </span>
-
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </Button>
+        {/* Load More / Infinite Scroll */}
+        {loadingMore && (
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <span className="ml-2 text-gray-600">Loading more...</span>
+          </div>
+        )}
+        
+        {!hasMore && media.length > 0 && (
+          <div className="text-center py-8 text-gray-500">
+            <p>All media files loaded ({totalDocs} total)</p>
           </div>
         )}
       </div>

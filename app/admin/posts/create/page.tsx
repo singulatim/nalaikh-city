@@ -13,10 +13,26 @@ import {
   ArrowLeft, 
   Save, 
   Eye, 
-  Upload,
   X,
   Plus
 } from "lucide-react"
+import ImageUpload from "@/components/admin/ImageUpload"
+import MediaBrowser from "@/components/admin/MediaBrowser"
+
+interface MediaFile {
+  id: string
+  filename: string
+  alt: string
+  url: string
+  filesize: number
+  width?: number
+  height?: number
+  sizes?: {
+    thumbnail?: { url: string, width: number, height: number }
+    card?: { url: string, width: number, height: number }
+    tablet?: { url: string, width: number, height: number }
+  }
+}
 
 interface CreatePostData {
   title: string
@@ -27,7 +43,7 @@ interface CreatePostData {
   category: string
   status: 'draft' | 'published' | 'archived'
   tags: string[]
-  featuredImage?: string
+  featuredImage?: MediaFile
   seo: {
     title: string
     description: string
@@ -46,6 +62,7 @@ export default function CreatePost() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [currentTag, setCurrentTag] = useState("")
+  const [showMediaBrowser, setShowMediaBrowser] = useState(false)
   
   const [formData, setFormData] = useState<CreatePostData>({
     title: '',
@@ -146,6 +163,7 @@ export default function CreatePost() {
         content: lexicalContent,
         status: isDraft ? 'draft' : 'published',
         publishedDate: new Date().toISOString(),
+        featuredImage: formData.featuredImage?.id || undefined,
       }
 
       const response = await fetch('/api/payload/posts', {
@@ -157,7 +175,6 @@ export default function CreatePost() {
       })
 
       if (response.ok) {
-        const result = await response.json()
         router.push(`/admin/posts`)
       } else {
         const error = await response.text()
@@ -427,22 +444,29 @@ export default function CreatePost() {
           {/* Featured Image */}
           <Card>
             <CardHeader>
-              <CardTitle>Гол зураг</CardTitle>
+              <CardTitle>Онцлох зураг</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-2">Гол зургийг оруулах</p>
-                <p className="text-sm text-gray-500">
-                  Зургийг чирэж оруулах эсвэл дараж сонгоно уу
-                </p>
-                <Button type="button" variant="outline" className="mt-4">
-                  Файл сонгох
-                </Button>
-              </div>
+              <ImageUpload
+                value={formData.featuredImage}
+                onChange={(media) => setFormData(prev => ({ ...prev, featuredImage: media }))}
+                onBrowse={() => setShowMediaBrowser(true)}
+                placeholder="Онцлох зураг оруулах эсвэл сонгох"
+              />
             </CardContent>
           </Card>
         </form>
+
+        {/* Media Browser Modal */}
+        <MediaBrowser
+          isOpen={showMediaBrowser}
+          onClose={() => setShowMediaBrowser(false)}
+          onSelect={(media) => {
+            setFormData(prev => ({ ...prev, featuredImage: media }))
+            setShowMediaBrowser(false)
+          }}
+          selectedId={formData.featuredImage?.id}
+        />
       </div>
     </div>
   )

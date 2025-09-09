@@ -41,15 +41,15 @@ export default function AdminDashboard() {
     try {
       setLoading(true)
       
-      // Fetch recent posts for display
-      const recentPostsResponse = await fetch('/api/posts?limit=5')
+      // Fetch recent posts for display (from Payload API to get all posts)
+      const recentPostsResponse = await fetch('/api/payload/posts?limit=5&sort=-publishedDate')
       if (recentPostsResponse.ok) {
         const recentPostsData = await recentPostsResponse.json()
         setPosts(recentPostsData.docs || [])
       }
       
-      // Fetch all posts for accurate statistics
-      const allPostsResponse = await fetch('/api/posts?limit=1000') // Get all posts
+      // Fetch all posts for accurate statistics using Payload API
+      const allPostsResponse = await fetch('/api/payload/posts?limit=1000') // Get all posts regardless of status
       if (allPostsResponse.ok) {
         const allPostsData = await allPostsResponse.json()
         

@@ -3,13 +3,17 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/lib/auth-client"
+import { Button } from "@/components/ui/button"
 import { 
   Home, 
   FileText, 
   Image, 
   Users, 
   Settings,
-  ExternalLink
+  ExternalLink,
+  LogOut,
+  User
 } from "lucide-react"
 
 const navigation = [
@@ -21,6 +25,7 @@ const navigation = [
 
 export default function AdminNav() {
   const pathname = usePathname()
+  const { user, logout, loading } = useAuth()
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
@@ -68,6 +73,30 @@ export default function AdminNav() {
               <ExternalLink className="h-4 w-4" />
               Сайт үзэх
             </Link>
+            
+            {!loading && user && (
+              <div className="flex items-center gap-3 border-l border-gray-200 pl-4">
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4 text-gray-500" />
+                  <span className="text-gray-700">
+                    {user.firstName} {user.lastName}
+                  </span>
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                    {user.role}
+                  </span>
+                </div>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => logout()}
+                  className="gap-2 text-gray-600 hover:text-red-600"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Гарах
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { 
@@ -17,7 +17,7 @@ import {
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
-interface User {
+interface UserType {
   id: string
   email: string
   firstName?: string
@@ -29,7 +29,7 @@ interface User {
 }
 
 interface UsersResponse {
-  docs: User[]
+  docs: UserType[]
   totalDocs: number
   totalPages: number
   page: number
@@ -37,7 +37,7 @@ interface UsersResponse {
 }
 
 export default function UsersManagement() {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<UserType[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
@@ -115,7 +115,7 @@ export default function UsersManagement() {
     })
   }
 
-  const getDisplayName = (user: User) => {
+  const getDisplayName = (user: UserType) => {
     if (user.firstName && user.lastName) {
       return `${user.firstName} ${user.lastName}`
     }
@@ -143,7 +143,7 @@ export default function UsersManagement() {
                 </Button>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Хэрэглэгчид удирдлага</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Хэрэглэгчдийн удирдлага</h1>
                 <p className="text-gray-600">Удирдлагын хэрэглэгчид, эрхүүд удирдах</p>
               </div>
             </div>
@@ -171,13 +171,13 @@ export default function UsersManagement() {
                 <div className="text-2xl font-bold text-red-600">
                   {users.filter(u => u.role === 'admin').length}
                 </div>
-                <div className="text-sm text-red-800">Удирдлагчд</div>
+                <div className="text-sm text-red-800">Admin</div>
               </div>
               <div className="bg-green-50 p-4 rounded-lg">
                 <div className="text-2xl font-bold text-green-600">
                   {users.filter(u => u.role === 'editor').length}
                 </div>
-                <div className="text-sm text-green-800">Найрулагчд</div>
+                <div className="text-sm text-green-800">Editor</div>
               </div>
             </div>
             
@@ -206,7 +206,7 @@ export default function UsersManagement() {
             <CardContent>
               <User className="h-12 w-12 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">Хэрэглэгч олдсонгүй</h3>
-              <p className="text-gray-600 mb-4">Хайлгаын сонголтын олов засч эсвэл шинэ хэрэглэгч уриарай</p>
+              <p className="text-gray-600 mb-4">Хайлгын түлхүүр үг өөрчилж эсвэл шинэ хэрэглэгч уриарай</p>
               <Button className="gap-2">
                 <Plus className="h-4 w-4" />
                 Анхны хэрэглэгч уриах
@@ -245,7 +245,7 @@ export default function UsersManagement() {
                           </div>
                           {user.lastLoginAt && (
                             <div className="text-green-600">
-                              Сүүлэ 14 идэвхтэй {formatDate(user.lastLoginAt)}
+                              Сүүлд идэвхтэй: {formatDate(user.lastLoginAt)}
                             </div>
                           )}
                         </div>
@@ -309,7 +309,7 @@ export default function UsersManagement() {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-red-100 text-red-800">admin</Badge>
-                  <span className="font-medium">Удирдлагч</span>
+                  <span className="font-medium">Admin</span>
                 </div>
                 <p className="text-sm text-gray-600">
                   Хэрэглэгч удирдлага, агуулга үүсэх, системийн тохиргоо зэрэг бүх хандалтын бүрэн эрх.
@@ -319,7 +319,7 @@ export default function UsersManagement() {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-blue-100 text-blue-800">editor</Badge>
-                  <span className="font-medium">Найрулагч</span>
+                  <span className="font-medium">Editor</span>
                 </div>
                 <p className="text-sm text-gray-600">
                   Агуулга үүсэх, засварлах, нийтлэх чадвартай харин хэрэглэгч удирдах, системийн тохиргоо хийх эрхгүй.

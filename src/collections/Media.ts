@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import path from 'path'
 
 const Media: CollectionConfig = {
   slug: 'media',
@@ -12,7 +13,7 @@ const Media: CollectionConfig = {
     delete: () => true,
   },
   upload: {
-    staticDir: '../../../public/media',
+    staticDir: path.resolve(process.cwd(), 'public/media'),
     staticURL: '/media',
     imageSizes: [
       {
@@ -41,7 +42,8 @@ const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      required: true,
+      required: false, // Make alt text optional
+      defaultValue: 'Uploaded image', // Provide a default value
     },
     {
       name: 'caption',
