@@ -25,11 +25,14 @@ export const translations = {
     waterPoints: "Усны цэгүүд",
     waterPointsDesc: "Хөв цөөрөм, усан сан, усан парк гэх мэт уст цэгүүд",
     ecoEducation: "Эко боловсрол",
-    ecoEducationDesc: '"Ногоон Налайх" эко боловсрол олгох тогтолцоо, дагалдах дэд бүтэц',
+    ecoEducationDesc:
+      '"Ногоон Налайх" эко боловсрол олгох тогтолцоо, дагалдах дэд бүтэц',
     greenTech: "Ногоон технологи",
-    greenTechDesc: "Ногоон технологи шингээсэн байгууламж, барилга, орон сууц, зам, талбай",
+    greenTechDesc:
+      "Ногоон технологи шингээсэн байгууламж, барилга, орон сууц, зам, талбай",
     passiveHousing: "Пассив стандарт орон сууц",
-    passiveHousingDesc: "Ногоон санхүүжилт GCF, ADB, JICA. EU Passive House стандарт",
+    passiveHousingDesc:
+      "Ногоон санхүүжилт GCF, ADB, JICA. EU Passive House стандарт",
 
     // Project Outcomes
     strategicResults: "Стратегийн үр дүн",
@@ -69,9 +72,11 @@ export const translations = {
     housingStats: "Орон сууцны статистик",
     housingShortage: "Орон сууцны бэрхшээл",
     downPaymentCapable: "Урьдчилгаа төлбөр боломжтой",
-    downPaymentCapableDesc: "НДШ, Цалин Орлого, Урьдчилгаа төлбөр, Барьцаа хөрөнгөтэй",
+    downPaymentCapableDesc:
+      "НДШ, Цалин Орлого, Урьдчилгаа төлбөр, Барьцаа хөрөнгөтэй",
     noDownPayment: "Урьдчилгаа төлбөрийн хуримтлалгүй",
-    noDownPaymentDesc: "НДШ, Цалин орлогоор баталгаажсан ч урьдчилгаа төлбөрийн бэрхшээлтэй",
+    noDownPaymentDesc:
+      "НДШ, Цалин орлогоор баталгаажсан ч урьдчилгаа төлбөрийн бэрхшээлтэй",
     mortgageDemand: "өрх - Ипотек зээлийн эрэлт",
     totalBorrowers: "Нийт зээлдэгч:",
     normalLoans: "Хэвийн зээл:",
@@ -80,13 +85,15 @@ export const translations = {
 
     // Financing Solutions
     financingSolutions: "Санхүүжилтийн шийдэл",
-    financingSolutionsDesc: "Нийлмэл хүүгүй, өртгийн хэмнэлттэй корпорацийн санхүүжилт",
+    financingSolutionsDesc:
+      "Нийлмэл хүүгүй, өртгийн хэмнэлттэй корпорацийн санхүүжилт",
     constructionFinancing: "Барилгажилтын санхүүжилт & Корпорацийн санхүүжилт",
     currentProblem: "Одоогийн асуудал:",
     currentProblemDesc:
       "Барилгын төсөл хэрэгжүүлэгч аж ахуйн нэгж нь барилгажилтын хугацаанд шаардлагатай санхүүжилтийг банк санхүүгийн байгууллагаас арилжааны зээл авах замаар шийдвэрлэдэг. Арилжааны зээл нь жилийн 23%-ийн хүүтэй байдаг.",
     solution: "Шийдэл:",
-    solutionDesc: "Бид барилга баригдаж эхлэх үеэс иргэнийг ипотекийн зээлд хамруулвал энэ хүү асуудал шийдэгдэнэ.",
+    solutionDesc:
+      "Бид барилга баригдаж эхлэх үеэс иргэнийг ипотекийн зээлд хамруулвал энэ хүү асуудал шийдэгдэнэ.",
     priceComparison: "Үнийн харьцуулалт",
     bankLoanPrice: "Банкны зээлийн дараах үнэ:",
     preOrderPrice: "Урьдчилсан захиалгын үнэ:",
@@ -94,7 +101,8 @@ export const translations = {
 
     // Four Solutions
     downPaymentInsurance: "Урьдчилгаа баталгаажуулалт",
-    downPaymentInsuranceDesc: "Залуучуудад ээлтэй байржуулах даатгал, баталгааны схем",
+    downPaymentInsuranceDesc:
+      "Залуучуудад ээлтэй байржуулах даатгал, баталгааны схем",
     corporateFinancing: "Корпорацийн санхүүжилт",
     corporateFinancingDesc: "Нийлмэл хүүгүй, өртгийн хэмнэлттэй",
     fundingSources: "Санхүүжилтийн эх үүсвэр",
@@ -112,7 +120,8 @@ export const translations = {
     phase3: "3-р үе шат: Үр дүн",
 
     // Contact & Footer
-    address: "Улаанбаатар хот, Баянзүрх дүүрэг, 26 дугаар хороо, Хүннүгийн гудамж, MAY SEVEN, 202 тоот",
+    address:
+      "Улаанбаатар хот, Баянзүрх дүүрэг, 26 дугаар хороо, Хүннүгийн гудамж, MAY SEVEN, 202 тоот",
     email: "info@ncdc.mn",
     phone: "+976 7755 85888",
     newsletter: "Мэдээллийн товхимол",
@@ -123,9 +132,11 @@ export const translations = {
     copyright:
       "© 2025 Налайх хотын хөгжлийн корпораци ОНӨААТҮГ. Бүх эрх хуулиар хамгаалагдсан.",
     waterFeatures: "Усны онцлог",
-    waterFeaturesDesc: "Цөөрөм, усан сан, усан парк болон бусад усны элементүүд",
+    waterFeaturesDesc:
+      "Цөөрөм, усан сан, усан парк болон бусад усны элементүүд",
     housingChallenge: "Орон сууцны бэрхшээл",
-    housingChallengeDesc: "Налайх хотын орон сууцны хангамж, эрэлтийн өнөөгийн байдал",
+    housingChallengeDesc:
+      "Налайх хотын орон сууцны хангамж, эрэлтийн өнөөгийн байдал",
     totalHouseholds: "Нийт өрх",
     totalHouseholdsDesc: "Налайх хотод амьдарч буй нийт өрхийн тоо",
     integratedApproach: "Нэгдсэн арга барил",
@@ -142,7 +153,6 @@ export const translations = {
     phoneContact: "Утасны дугаар",
     emailContact: "Имэйл хаяг",
     businessHours: "Ажлын цаг",
-    responseTime: "Хариу өгөх хугацаа",
     partnershipOpportunities: "Хамтын ажиллагааны боломжууд",
     partnershipDesc:
       "Бид ногоон санхүүжилт, тогтвортой хөгжил, хот төлөвлөлтийн чиглэлээр хамтран ажиллах боломжуудыг эрэлхийлж байна.",
@@ -164,22 +174,27 @@ export const translations = {
 
     // Green Nalaikh Components
     greenComponents: '"Green Nalaikh" Project Components',
-    greenComponentsDesc: "Comprehensive eco-friendly urban development solution",
+    greenComponentsDesc:
+      "Comprehensive eco-friendly urban development solution",
     greenZone: "Green Zone",
     greenZoneDesc: "Public trees, shrubs, lawns, flowers, and greenhouses",
     waterPoints: "Water Features",
     waterPointsDesc: "Ponds, reservoirs, water parks and other water elements",
     ecoEducation: "Eco Education",
-    ecoEducationDesc: '"Green Nalaikh" eco-education system and supporting infrastructure',
+    ecoEducationDesc:
+      '"Green Nalaikh" eco-education system and supporting infrastructure',
     greenTech: "Green Technology",
-    greenTechDesc: "Buildings, housing, roads and spaces integrated with green technology",
+    greenTechDesc:
+      "Buildings, housing, roads and spaces integrated with green technology",
     passiveHousing: "Passive standard housing",
-    passiveHousingDesc: "Green financing GCF, ADB, JICA. EU Passive House standard",
+    passiveHousingDesc:
+      "Green financing GCF, ADB, JICA. EU Passive House standard",
 
     // Project Outcomes
     strategicResults: "Strategic Results",
     projectOutcomes: "Major outcomes from coordinated project implementation",
-    projectOutcomesDesc: "Integrated approach projects will transform Nalaikh into a modern, sustainable city.",
+    projectOutcomesDesc:
+      "Integrated approach projects will transform Nalaikh into a modern, sustainable city.",
     industrialPark: "Industrial Technology Park",
     industrialParkDesc: "Modern technology and innovation center",
     urbanDevelopment: "Urban Development & Housing",
@@ -193,7 +208,8 @@ export const translations = {
     benefitsTitle: "Benefits from these projects",
     benefitsDesc: "Impact on Nalaikh city's economic and social development",
     greenFinancing: "Attract green financing",
-    greenFinancingDesc: "Opportunity to attract funding from international green funds",
+    greenFinancingDesc:
+      "Opportunity to attract funding from international green funds",
     exportSupport: "Export support improvement",
     exportSupportDesc: "Increase in manufactured product exports",
     jobCreation: "Increased labor demand",
@@ -213,9 +229,11 @@ export const translations = {
     housingStats: "Housing Statistics",
     housingShortage: "Housing shortage",
     downPaymentCapable: "Down payment capable",
-    downPaymentCapableDesc: "With social insurance, salary income, down payment, collateral assets",
+    downPaymentCapableDesc:
+      "With social insurance, salary income, down payment, collateral assets",
     noDownPayment: "No down payment savings",
-    noDownPaymentDesc: "Verified by social insurance and salary income but lacking down payment",
+    noDownPaymentDesc:
+      "Verified by social insurance and salary income but lacking down payment",
     mortgageDemand: "households - Mortgage loan demand",
     totalBorrowers: "Total borrowers:",
     normalLoans: "Normal loans:",
@@ -224,7 +242,8 @@ export const translations = {
 
     // Financing Solutions
     financingSolutions: "Financing Solutions",
-    financingSolutionsDesc: "Compound interest-free, cost-effective corporate financing",
+    financingSolutionsDesc:
+      "Compound interest-free, cost-effective corporate financing",
     constructionFinancing: "Construction Financing & Corporate Financing",
     currentProblem: "Current problem:",
     currentProblemDesc:
@@ -239,7 +258,8 @@ export const translations = {
 
     // Four Solutions
     downPaymentInsurance: "Down payment insurance",
-    downPaymentInsuranceDesc: "Youth-friendly housing program with insurance and guarantee scheme",
+    downPaymentInsuranceDesc:
+      "Youth-friendly housing program with insurance and guarantee scheme",
     corporateFinancing: "Corporate financing",
     corporateFinancingDesc: "Compound interest-free, cost-effective",
     fundingSources: "Funding sources",
@@ -257,7 +277,8 @@ export const translations = {
     phase3: "Phase 3: Results",
 
     // Contact & Footer
-    address: "Ulaanbaatar, Bayanzurkh District, 26th khoroo, Hunnugiin Street, MAY SEVEN, Room 202",
+    address:
+      "Ulaanbaatar, Bayanzurkh District, 26th khoroo, Hunnugiin Street, MAY SEVEN, Room 202",
     email: "info@ncdc.mn",
     phone: "+976 7755 85888",
     newsletter: "Newsletter",
@@ -265,11 +286,14 @@ export const translations = {
     aboutUs: "About Us",
     careers: "Careers",
     news: "News",
-    copyright: "© 2025 Nalaikh City Development Corporation LLC. All rights reserved.",
+    copyright:
+      "© 2025 Nalaikh City Development Corporation LLC. All rights reserved.",
     waterFeatures: "Water Features",
-    waterFeaturesDesc: "Ponds, reservoirs, water parks and other water elements",
+    waterFeaturesDesc:
+      "Ponds, reservoirs, water parks and other water elements",
     housingChallenge: "Housing challenge",
-    housingChallengeDesc: "Current state of housing supply and demand in Nalaikh city",
+    housingChallengeDesc:
+      "Current state of housing supply and demand in Nalaikh city",
     totalHouseholds: "Total households",
     totalHouseholdsDesc: "Total number of households living in Nalaikh city",
     integratedApproach: "Integrated approach",
@@ -286,7 +310,6 @@ export const translations = {
     phoneContact: "Phone Contact",
     emailContact: "Email Contact",
     businessHours: "Business Hours",
-    responseTime: "Response Time",
     partnershipOpportunities: "Partnership Opportunities",
     partnershipDesc:
       "We are seeking opportunities to collaborate in green finance, sustainable development, and urban planning.",
@@ -302,19 +325,19 @@ export const translations = {
     ecoFriendlyCity: "环保城市",
     heroTitle: "绿色纳来哈",
     heroDescription:
-      '环保型城市建设。纳来哈市发展公司有限责任公司的“绿色纳来哈”项目是一项融合可持续发展、生态系统保护和绿色技术的创新解决方案。',
+      "环保型城市建设。纳来哈市发展公司有限责任公司的“绿色纳来哈”项目是一项融合可持续发展、生态系统保护和绿色技术的创新解决方案。",
     viewProjects: "查看项目",
     learnMore: "了解更多",
 
     // Green Nalaikh Components
-    greenComponents: '“绿色纳来哈”项目组件',
+    greenComponents: "“绿色纳来哈”项目组件",
     greenComponentsDesc: "环保型城市建设综合方案",
     greenZone: "绿色区域",
     greenZoneDesc: "公共树木、灌木、草坪、花卉和温室",
     waterPoints: "水景设施",
     waterPointsDesc: "池塘、水库、水上乐园及其他水元素",
     ecoEducation: "生态教育",
-    ecoEducationDesc: '“绿色纳来哈”生态教育体系及配套基础设施',
+    ecoEducationDesc: "“绿色纳来哈”生态教育体系及配套基础设施",
     greenTech: "绿色技术",
     greenTechDesc: "融合绿色技术的建筑、住房、道路与空间",
     passiveHousing: "被动式标准住房",
@@ -323,7 +346,8 @@ export const translations = {
     // Project Outcomes
     strategicResults: "战略成果",
     projectOutcomes: "项目协调实施带来的主要成果",
-    projectOutcomesDesc: "综合方法的项目将把纳来哈市转变为现代、可持续发展的城市。",
+    projectOutcomesDesc:
+      "综合方法的项目将把纳来哈市转变为现代、可持续发展的城市。",
     industrialPark: "工业技术园",
     industrialParkDesc: "现代技术与创新中心",
     urbanDevelopment: "城市发展与住房",
@@ -430,9 +454,9 @@ export const translations = {
     phoneContact: "电话联系",
     emailContact: "电子邮件联系",
     businessHours: "营业时间",
-    responseTime: "响应时间",
     partnershipOpportunities: "合作机会",
-    partnershipDesc: "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
+    partnershipDesc:
+      "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
   },
 } as const
 
