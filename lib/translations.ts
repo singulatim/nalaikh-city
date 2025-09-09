@@ -16,11 +16,12 @@ export const translations = {
       'Байгальд ээлтэй хот байгуулалт. Налайх хотын хөгжлийн корпораци ОНӨААТҮГ-ийн "Ногоон Налайх" төсөл нь тогтвортой хөгжил, экосистемийн хамгаалалт, ногоон технологийг нэгтгэсэн шинэлэг шийдэл юм.',
     viewProjects: "Төслүүдийг үзэх",
     learnMore: "Дэлгэрэнгүй",
+    about: "Бидний тухай",
 
     // Green Nalaikh Components
-    greenComponents: '"Ногоон Налайх" төслийн бүрэлдэхүүн',
-    greenComponentsDesc: "Байгальд ээлтэй хот байгуулалтын цогц шийдэл",
-    greenZone: "Ногоон бүс",
+    greenComponents: '"Ногоон Налайх" төслийн бүрэлдэхүүн хэсгүүд',
+    greenComponentsDesc: "Байгальд ээлтэй хот байгуулалтын иж бүрэн шийдэл",
+    greenZone: "Ногоон байгууламж",
     greenZoneDesc: "Нийтийн эзэмшлийн мод, бут сөөг, зүлэг, цэцэг, хүлэмж",
     waterPoints: "Усны цэгүүд",
     waterPointsDesc: "Хөв цөөрөм, усан сан, усан парк гэх мэт уст цэгүүд",
@@ -36,9 +37,9 @@ export const translations = {
 
     // Project Outcomes
     strategicResults: "Стратегийн үр дүн",
-    projectOutcomes: "Төслүүд уялдаатай ажилласнаар гарах томоохон үр дүн",
+    projectOutcomes: "Төслийн уялдаа холбоо, хэрэгжилтээс гарах гол үр дүн",
     projectOutcomesDesc:
-      "Нэгдмэл хандлагаар хэрэгжүүлэх төслүүд нь Налайх хотыг орчин үеийн, тогтвортой хөгжилтэй хот болгон өөрчлөх болно.",
+      "Налайхыг орчин үеийн, тогтвортой хөгжлийн хот болгоно.",
     industrialPark: "Үйлдвэрлэл технологийн парк",
     industrialParkDesc: "Орчин үеийн технологи, инновацийн төв",
     urbanDevelopment: "Хот байгуулалт, орон сууцжуулалт",
@@ -49,7 +50,7 @@ export const translations = {
     greenNalaikhDesc: "Байгальд ээлтэй, тогтвортой хөгжил",
 
     // Benefits
-    benefitsTitle: "Эдгээр төслүүдээс гарах ашиг тус",
+    benefitsTitle: "Төслийн үр дүнд үүсэх ашиг тус",
     benefitsDesc: "Налайх хотын эдийн засаг, нийгмийн хөгжилд үзүүлэх нөлөө",
     greenFinancing: "Ногоон санхүүжилт татах",
     greenFinancingDesc: "Олон улсын ногоон сангаас хөрөнгө татах боломж",
@@ -70,7 +71,7 @@ export const translations = {
 
     // Housing Statistics
     housingStats: "Орон сууцны статистик",
-    housingShortage: "Орон сууцны бэрхшээл",
+    housingShortage: "Орон сууцны дутагдал",
     downPaymentCapable: "Урьдчилгаа төлбөр боломжтой",
     downPaymentCapableDesc:
       "НДШ, Цалин Орлого, Урьдчилгаа төлбөр, Барьцаа хөрөнгөтэй",
@@ -131,10 +132,10 @@ export const translations = {
     news: "Мэдээ",
     copyright:
       "© 2025 Налайх хотын хөгжлийн корпораци ОНӨААТҮГ. Бүх эрх хуулиар хамгаалагдсан.",
-    waterFeatures: "Усны онцлог",
+    waterFeatures: "Усан байгууламжууд",
     waterFeaturesDesc:
       "Цөөрөм, усан сан, усан парк болон бусад усны элементүүд",
-    housingChallenge: "Орон сууцны бэрхшээл",
+    housingChallenge: "",
     housingChallengeDesc:
       "Налайх хотын орон сууцны хангамж, эрэлтийн өнөөгийн байдал",
     totalHouseholds: "Нийт өрх",
@@ -156,6 +157,14 @@ export const translations = {
     partnershipOpportunities: "Хамтын ажиллагааны боломжууд",
     partnershipDesc:
       "Бид ногоон санхүүжилт, тогтвортой хөгжил, хот төлөвлөлтийн чиглэлээр хамтран ажиллах боломжуудыг эрэлхийлж байна.",
+    vision: "Алсын хараа",
+    visionBody:
+      "Налайх дүүргийн иргэдийн эрүүл, аюулгүй, орчныг бүрдүүлсэн амьдрахад таатай орчин бүрдүүлж, нийслэлийн хөгжлийн нэгэн чухал төв болохыг зорьж байна.",
+    participation: "Хамтын оролцоо хөгжлийн түлхүүр",
+    mission: "Эрхэм зорилго",
+    missionBody:
+      "Налайх дүүргийн гэр хорооллыг дахин төлөвлөн, дэд бүтцийг иж бүрнээр шийдсэн, иргэдийн эрүүл, аюулгүй, орчныг бүрдүүлсэн амьдрахад таатай орчин бүрдүүлэхэд оршино.",
+    directorGreeting: "Захирлын мэндчилгээ",
   },
   en: {
     company: "Nalaikh City Development Corporation",
@@ -171,6 +180,7 @@ export const translations = {
       'Eco-friendly urban development. The "Green Nalaikh" project by Nalaikh City Development Corporation LLC is an innovative solution that integrates sustainable development, ecosystem protection, and green technology.',
     viewProjects: "View Projects",
     learnMore: "Learn More",
+    about: "About Us",
 
     // Green Nalaikh Components
     greenComponents: '"Green Nalaikh" Project Components',
@@ -313,6 +323,14 @@ export const translations = {
     partnershipOpportunities: "Partnership Opportunities",
     partnershipDesc:
       "We are seeking opportunities to collaborate in green finance, sustainable development, and urban planning.",
+    vision: "Vision",
+    visionBody:
+      "We aim to create a safe, healthy, and pleasant living environment for the citizens of Nalaikh district, making it one of the key development centers of the capital city.",
+    participation: "Participation is the Key to Development",
+    mission: "Mission",
+    missionBody:
+      "To redevelop the ger district of Nalaikh, provide comprehensive infrastructure solutions, and create a safe, healthy, and pleasant living environment for citizens.",
+    directorGreeting: "Director's Message",
   },
   zh: {
     company: "Nalaikh City Development Corporation",
@@ -328,6 +346,7 @@ export const translations = {
       "环保型城市建设。纳来哈市发展公司有限责任公司的“绿色纳来哈”项目是一项融合可持续发展、生态系统保护和绿色技术的创新解决方案。",
     viewProjects: "查看项目",
     learnMore: "了解更多",
+    about: "关于我们",
 
     // Green Nalaikh Components
     greenComponents: "“绿色纳来哈”项目组件",
@@ -457,6 +476,14 @@ export const translations = {
     partnershipOpportunities: "合作机会",
     partnershipDesc:
       "我们正在寻找在绿色金融、可持续发展和城市规划方面合作的机会。",
+    vision: "愿景",
+    visionBody:
+      "我们致力于为纳来哈区居民创造一个健康、安全、宜居的生活环境，使其成为首都发展的重要中心之一。",
+    participation: "参与是发展的关键",
+    mission: "使命",
+    missionBody:
+      "重新规划纳来哈区的棚户区，全面解决基础设施问题，为居民创造一个健康、安全、宜居的生活环境。",
+    directorGreeting: "董事长致辞",
   },
 } as const
 

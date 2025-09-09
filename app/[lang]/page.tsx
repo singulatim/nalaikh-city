@@ -5,13 +5,8 @@ import HousingStatisticSection from "@/components/sections/housing-statistics"
 import FinancingSolutionsSection from "@/components/sections/financing-solutions"
 import ImplementationTimelineSection from "@/components/sections/implementation-timeline"
 import ContactSection from "@/components/sections/contact"
-import Footer from "@/components/sections/footer"
-import Header from "@/components/sections/header"
 import { getT } from "@/lib/i18n"
-
-type PageProps = {
-  params: Promise<{ lang: "mn" | "en" | "zh" }>
-}
+import { PageProps } from "@/lib/_types"
 
 export default async function LocaleHomePage({ params }: PageProps) {
   const { lang: language } = await params
@@ -19,8 +14,6 @@ export default async function LocaleHomePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header t={t} language={language} />
-
       <HeroSection t={t} />
 
       <ProjectDetailSection t={t} />
@@ -34,8 +27,6 @@ export default async function LocaleHomePage({ params }: PageProps) {
       <ImplementationTimelineSection t={t} />
 
       <ContactSection t={t} />
-
-      <Footer t={t} />
     </div>
   )
 }
