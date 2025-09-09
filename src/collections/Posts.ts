@@ -47,7 +47,6 @@ const Posts: CollectionConfig = {
       admin: {
         position: "sidebar",
       },
-      filter: true,
     },
     {
       name: "category",

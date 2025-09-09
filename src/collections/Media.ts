@@ -1,10 +1,10 @@
-import type { CollectionConfig } from 'payload'
-import path from 'path'
+import type { CollectionConfig } from "payload"
+import path from "path"
 
 const Media: CollectionConfig = {
-  slug: 'media',
+  slug: "media",
   admin: {
-    useAsTitle: 'filename',
+    useAsTitle: "filename",
   },
   access: {
     read: () => true,
@@ -13,41 +13,40 @@ const Media: CollectionConfig = {
     delete: () => true,
   },
   upload: {
-    staticDir: path.resolve(process.cwd(), 'public/media'),
-    staticURL: '/media',
+    staticDir: path.resolve(process.cwd(), "public/media"),
     imageSizes: [
       {
-        name: 'thumbnail',
+        name: "thumbnail",
         width: 400,
         height: 300,
-        position: 'centre',
+        position: "centre",
       },
       {
-        name: 'card',
+        name: "card",
         width: 768,
         height: 432,
-        position: 'centre',
+        position: "centre",
       },
       {
-        name: 'tablet',
+        name: "tablet",
         width: 1024,
         height: undefined,
-        position: 'centre',
+        position: "centre",
       },
     ],
-    adminThumbnail: 'thumbnail',
-    mimeTypes: ['image/*'],
+    adminThumbnail: "thumbnail",
+    mimeTypes: ["image/*"],
   },
   fields: [
     {
-      name: 'alt',
-      type: 'text',
+      name: "alt",
+      type: "text",
       required: false, // Make alt text optional
-      defaultValue: 'Uploaded image', // Provide a default value
+      defaultValue: "Uploaded image", // Provide a default value
     },
     {
-      name: 'caption',
-      type: 'textarea',
+      name: "caption",
+      type: "textarea",
     },
   ],
 }

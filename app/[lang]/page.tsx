@@ -10,11 +10,11 @@ import Header from "@/components/sections/header"
 import { getT } from "@/lib/i18n"
 
 type PageProps = {
-  params: { lang: "mn" | "en" | "zh" }
+  params: Promise<{ lang: "mn" | "en" | "zh" }>
 }
 
-export default function LocaleHomePage({ params }: PageProps) {
-  const language = params.lang
+export default async function LocaleHomePage({ params }: PageProps) {
+  const { lang: language } = await params
   const t = getT(language)
 
   return (

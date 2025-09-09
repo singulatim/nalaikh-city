@@ -4,11 +4,12 @@ import { promises as fs } from 'fs'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
+    const { path: pathSegments } = await params
     // Handle Payload's /file/ URL structure
-    let filePath = params.path.join('/')
+    let filePath = pathSegments.join('/')
     
     // If the path starts with 'file/', remove it since that's Payload's URL structure
     // but the actual files are stored directly in the media folder
@@ -50,7 +51,7 @@ export async function GET(
         break
     }
 
-    return new NextResponse(fileBuffer, {
+    return new NextResponse(fileBuffer as unknown as BodyInit, {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',

@@ -1,6 +1,7 @@
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import configPromise from '../../../src/payload.config'
 import { NextRequest, NextResponse } from 'next/server'
+import { Where } from 'payload'
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get('category')
     const locale = searchParams.get('locale') || 'mn'
 
-    const where: Record<string, unknown> = {
+    const where: Where = {
       status: { equals: 'published' }
     }
 
