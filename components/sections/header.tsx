@@ -16,10 +16,28 @@ import CompanyLogo from "@/assets/logos/ncdc-logo.jpg"
 type Props = {
   t: Record<string, string>
   language: Language
-  setLanguage: (lang: Language) => void
+  setLanguage?: (lang: Language) => void
 }
 
+import { useRouter, usePathname } from "next/navigation"
+
 export default function Header({ t, language, setLanguage }: Props) {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const navigateToLanguage = (nextLang: Language) => {
+    // Expect paths like /mn, /en, /zh plus optional hash
+    const url = new URL(window.location.href)
+    const hash = url.hash
+    const segments = pathname.split("/").filter(Boolean)
+    if (segments.length === 0) {
+      router.push(`/${nextLang}${hash}`)
+      return
+    }
+    segments[0] = nextLang
+    const nextPath = `/${segments.join("/")}${hash}`
+    router.push(nextPath)
+  }
   return (
     <header className="border-b bg-white backdrop-blur supports-[backdrop-filter]:white/60 sticky top-0 z-50 dark:bg-nalaikh-navy/95 dark:supports-[backdrop-filter]:bg-nalaikh-navy/90 dark:border-nalaikh-gold/20">
       <div className="container mx-auto px-4 py-4">
@@ -72,7 +90,9 @@ export default function Header({ t, language, setLanguage }: Props) {
             {/* Language Selector */}
             <Select
               value={language}
-              onValueChange={(value: Language) => setLanguage(value)}
+              onValueChange={(value: Language) =>
+                setLanguage ? setLanguage(value) : navigateToLanguage(value)
+              }
             >
               <SelectTrigger className="w-20 text-primary border-primary dark:bg-nalaikh-navy/50 h-9 dark:border-nalaikh-gold/30 dark:text-nalaikh-gold">
                 <SelectValue />

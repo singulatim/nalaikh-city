@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nalaikh City Development Corporation",
-  description: "Green Nalaikh – Eco-friendly urban development and sustainable city initiatives.",
-};
+  description:
+    "Green Nalaikh – Eco-friendly urban development and sustainable city initiatives.",
+}
 
 export default function RootLayout({
   children,
@@ -23,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="mn">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
-      </body> 
+      </body>
     </html>
   )
 }
