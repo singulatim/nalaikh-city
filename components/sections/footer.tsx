@@ -11,8 +11,7 @@ export default function Footer({t}: Translate) {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <Image src={CompanyLogo} alt="NCDC Logo" width={40} height={40} className="size-10" />
-                <span className="text-lg font-bold dark:text-nalaikh-gold">NCDC</span>
+                <Image src={CompanyLogo} alt="NCDC Logo" className="w-14" />
               </div>
               <p className="text-blue-100 dark:text-gray-300">{t.company}</p>
             </div>

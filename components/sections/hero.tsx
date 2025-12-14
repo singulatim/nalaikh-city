@@ -1,6 +1,6 @@
 "use client"
 
-import CityImage from "@/assets/images/nalaikh-city.jpg"
+import CityImage from "@/assets/images/new-nalaikh.jpg"
 import { Translate } from "@/lib/_types"
 import { Leaf } from "lucide-react"
 

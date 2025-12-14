@@ -43,15 +43,10 @@ export default function Header({ t, language, setLanguage }: Props) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-3">
-              <Image src={CompanyLogo} alt="company Logo" className="size-10" />
-              <div>
-                <span className="text-lg font-bold text-primary dark:text-nalaikh-gold">
-                  НХХК
-                </span>
+              <Image src={CompanyLogo} alt="company Logo" className="w-14" />
                 <div className="text-xs text-primary uppercase font-semibold -mt-1 dark:text-nalaikh-gold/80">
                   {t.company}
                 </div>
-              </div>
             </Link>
           </div>
 
